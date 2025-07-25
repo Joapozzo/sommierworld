@@ -11,33 +11,31 @@ const StatsSection = () => {
     });
     const sectionRef = useRef(null);
 
-    const animateCount = (
-        start: number,
-        end: number,
-        duration: number,
-        key: keyof typeof counts
-    ) => {
-        const range = end - start;
-        const increment = range / (duration / 16);
-        let current = start;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= end) {
-                current = end;
-                clearInterval(timer);
-            }
-            setCounts(prev => ({ ...prev, [key]: Math.floor(current) }));
-        }, 16);
-    };
-
-    // Observer para detectar cuando la sección está visible
     useEffect(() => {
+        const animateCount = (
+            start: number,
+            end: number,
+            duration: number,
+            key: keyof typeof counts
+        ) => {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                setCounts(prev => ({ ...prev, [key]: Math.floor(current) }));
+            }, 16);
+        };
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting && !isVisible) {
                     setIsVisible(true);
-                    // Iniciar animaciones de conteo
                     setTimeout(() => animateCount(0, 2500, 2000, 'clients'), 300);
                     setTimeout(() => animateCount(0, 4.9, 2000, 'rating'), 500);
                     setTimeout(() => animateCount(0, 25, 2000, 'experience'), 700);
@@ -53,6 +51,7 @@ const StatsSection = () => {
 
         return () => observer.disconnect();
     }, [isVisible]);
+
 
     const stats = [
         {
@@ -96,8 +95,8 @@ const StatsSection = () => {
                             <div
                                 key={index}
                                 className={`group text-center transition-all duration-700 transform ${isVisible
-                                        ? 'opacity-100 translate-y-0'
-                                        : 'opacity-0 translate-y-12'
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
                                     }`}
                                 style={{ transitionDelay: `${index * 200}ms` }}
                             >

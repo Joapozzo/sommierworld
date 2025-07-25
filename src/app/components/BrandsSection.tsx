@@ -127,10 +127,12 @@ const BrandsSection = () => {
 
                                     {/* Image */}
                                     <div className="mb-6 overflow-hidden rounded-2xl">
-                                        <img
+                                        <Image
                                             src={brand.image}
                                             alt={`${brand.name} product`}
                                             className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-700"
+                                            width={1200}
+                                            height={630}
                                         />
                                     </div>
 

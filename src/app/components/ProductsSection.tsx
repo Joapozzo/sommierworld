@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './ui/Button';
+import Image from 'next/image';
 
 const ProductsSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -76,10 +77,12 @@ const ProductsSection = () => {
                     >
                         {/* Background Image */}
                         <div className="relative h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[750px]">
-                            <img
+                            <Image
                                 src={category.image}
                                 alt={category.title}
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                width={1200}
+                                height={630}
                             />
 
                             {/* Overlay */}

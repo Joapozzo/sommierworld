@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Star, Phone, MessageCircle, MapPin, Mail } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Mail } from 'lucide-react';
 
 const Footer = () => {
     const [isVisible, setIsVisible] = useState(false);

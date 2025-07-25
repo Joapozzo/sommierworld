@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 
 const GallerySection = () => {
@@ -131,10 +132,12 @@ const GallerySection = () => {
                         >
                             {/* Image Container */}
                             <div className={`relative ${item.heightClass} overflow-hidden`}>
-                                <img
+                                <Image
                                     src={item.image}
                                     alt={item.title}
                                     className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                                    width={1200}
+                                    height={630}
                                 />
 
                                 {/* Overlay */}

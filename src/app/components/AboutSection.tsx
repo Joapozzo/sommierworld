@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Users, Heart, Star, Award } from 'lucide-react';
+import Image from 'next/image';
 
 const AboutSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -52,10 +53,12 @@ const AboutSection = () => {
                             }`}
                     >
                         <div className="relative group">
-                            <img
+                            <Image
                                 src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80"
                                 alt="Consulta personalizada de descanso"
                                 className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-xl transition-transform duration-700 group-hover:scale-[1.02]"
+                                width={700}
+                                height={400}
                             />
 
                             {/* Floating Icon Badge */}
