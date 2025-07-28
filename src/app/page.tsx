@@ -9,6 +9,7 @@ import ServiceSection from './components/ServiceSection';
 import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import MultimediaSection from './components/MultimediaSection';
 
 const LuxuryMattressLanding = () => {
   return (
@@ -17,6 +18,7 @@ const LuxuryMattressLanding = () => {
       <StatsSection/>
       <BrandsSection/>
       <ProductsSection/>
+      <MultimediaSection/>
       <AboutSection/>
       <ServiceSection/>
       <GallerySection/>
