@@ -1,18 +1,18 @@
-
 import { useEffect, useRef, useState } from 'react';
 import Button from './ui/Button';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 
-
 const ContactSection = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [selectedLocal, setSelectedLocal] = useState(0);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         whatsapp: '',
-        message: ''
+        message: '',
+        local: ''
     });
-    const sectionRef = useRef(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -31,7 +31,7 @@ const ContactSection = () => {
         return () => observer.disconnect();
     }, [isVisible]);
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
@@ -44,26 +44,30 @@ const ContactSection = () => {
         // Aquí iría la lógica de envío del formulario
     };
 
-    const contactInfo = [
+    const locales = [
         {
-            icon: Phone,
-            label: 'Teléfono',
-            value: '+54 351 123-4567',
-            href: 'tel:+543511234567'
+            name: 'Local Centro',
+            address: 'Av. General Paz 123, Centro, Córdoba',
+            phone: '+54 351 423-7650',
+            whatsapp: '+54 9 351 423-7650',
+            coordinates: '31°24\'14.2"S 64°11\'07.1"W',
+            mapUrl: 'https://maps.google.com/?q=-31.4039,-64.1853',
+            mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.3!2d-64.1853!3d-31.4039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI0JzE0LjIiUyA2NMKwMTEnMDcuMSJX!5e0!3m2!1ses!2sar!4v1699024800000!5m2!1ses!2sar'
         },
         {
-            icon: Mail,
-            label: 'Email',
-            value: 'info@sommierworld.com',
-            href: 'mailto:info@sommierworld.com'
-        },
-        {
-            icon: MapPin,
-            label: 'Ubicación',
-            value: 'Córdoba, Argentina',
-            href: '#'
+            name: 'Local Nueva Córdoba',
+            address: 'Av. Hipólito Yrigoyen 567, Nueva Córdoba',
+            phone: '+54 351 756-9380',
+            whatsapp: '+54 9 351 756-9380',
+            coordinates: '31°25\'32.1"S 64°11\'45.2"W',
+            mapUrl: 'https://maps.google.com/?q=-31.4256,-64.1959',
+            mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.8!2d-64.1959!3d-31.4256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI1JzMyLjEiUyA2NMKwMTEnNDUuMiJX!5e0!3m2!1ses!2sar!4v1699024800001!5m2!1ses!2sar'
         }
     ];
+
+    const generalContact = {
+        email: 'info@sommierworld.com'
+    };
 
     return (
         <section
@@ -121,7 +125,7 @@ const ContactSection = () => {
                 {/* Content Grid */}
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 max-w-7xl mx-auto">
 
-                    {/* Left Column - Info */}
+                    {/* Left Column - Locales Info */}
                     <div
                         className={`transition-all duration-700 transform ${isVisible
                             ? 'opacity-100 translate-x-0'
@@ -130,40 +134,107 @@ const ContactSection = () => {
                         style={{ transitionDelay: '500ms' }}
                     >
                         <h3 className="text-2xl sm:text-3xl font-light text-white mb-6 lg:mb-8">
-                            Asesoramiento Experto
+                            Nuestros Locales
                         </h3>
                         <p className="text-white/90 font-light leading-relaxed mb-10 lg:mb-12 text-lg">
-                            Cada cuerpo es diferente, y también lo son las preferencias de descanso.
-                            Compártenos tus necesidades y te ayudaremos a descubrir la combinación perfecta
-                            de comodidad, soporte y lujo que transformará tus noches.
+                            Visitanos en cualquiera de nuestros dos locales en Córdoba. Cada uno cuenta con 
+                            expertos especializados para ayudarte a encontrar el descanso perfecto.
                         </p>
 
-                        {/* Contact Info */}
-                        <div className="space-y-6">
-                            {contactInfo.map((info, index) => {
-                                const Icon = info.icon;
-                                return (
-                                    <div
-                                        key={index}
-                                        className={`group flex items-center space-x-4 transition-all duration-500 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
-                                            } hover:translate-x-2`}
-                                        style={{ transitionDelay: `${600 + index * 100}ms` }}
-                                    >
-                                        <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                                            <Icon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
-                                        </div>
-                                        <div>
-                                            <p className="text-white/70 text-sm font-light">{info.label}</p>
-                                            <a
-                                                href={info.href}
-                                                className="text-white font-light hover:text-white/90 transition-colors duration-300"
-                                            >
-                                                {info.value}
-                                            </a>
-                                        </div>
+                        {/* Navegación entre locales */}
+                        <div className="flex bg-white/10 backdrop-blur-sm p-2 rounded-2xl border border-white/20 mb-8 gap-2">
+                            {locales.map((local, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setSelectedLocal(index)}
+                                    className={`flex-1 py-3 px-6 rounded-xl font-light transition-all duration-300 ${
+                                        selectedLocal === index
+                                            ? 'bg-white text-blue-600 shadow-lg'
+                                            : 'text-white/80 hover:text-white hover:bg-white/10'
+                                    }`}
+                                >
+                                    {local.name}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Local seleccionado */}
+                        <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 mb-8">
+                            <h4 className="text-2xl font-normal text-white mb-6">{locales[selectedLocal].name}</h4>
+                            
+                            <div className="space-y-6">
+                                {/* Dirección */}
+                                <div className="group flex items-start space-x-4">
+                                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 flex-shrink-0">
+                                        <MapPin className="w-6 h-6 text-white" />
                                     </div>
-                                );
-                            })}
+                                    <div>
+                                        <p className="text-white/70 text-sm font-light mb-1">Dirección</p>
+                                        <a
+                                            href={locales[selectedLocal].mapUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-white font-light hover:text-white/90 transition-colors duration-300 text-lg block"
+                                        >
+                                            {locales[selectedLocal].address}
+                                        </a>
+                                        <p className="text-white/60 text-sm font-light mt-2">
+                                            {locales[selectedLocal].coordinates}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Teléfono */}
+                                <div className="group flex items-center space-x-4">
+                                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                                        <Phone className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="text-white/70 text-sm font-light mb-1">Teléfono</p>
+                                        <a
+                                            href={`tel:${locales[selectedLocal].phone.replace(/\s/g, '')}`}
+                                            className="text-white font-light hover:text-white/90 transition-colors duration-300 text-lg"
+                                        >
+                                            {locales[selectedLocal].phone}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Mapa del local seleccionado */}
+                        <div className="bg-white/10 backdrop-blur-sm p-6 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 mb-8">
+                            <h5 className="text-lg font-light text-white mb-4 text-center">Ubicación</h5>
+                            <div className="relative rounded-2xl overflow-hidden">
+                                <iframe
+                                    key={selectedLocal}
+                                    src={locales[selectedLocal].mapEmbed}
+                                    width="100%"
+                                    height="250"
+                                    style={{ border: 0 }}
+                                    allowFullScreen={true}
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    className="rounded-2xl"
+                                    title={`Ubicación de ${locales[selectedLocal].name}`}
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        {/* Email General */}
+                        <div className="group flex items-center space-x-4 hover:translate-x-2 transition-all duration-300">
+                            <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                                <Mail className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
+                            </div>
+                            <div>
+                                <p className="text-white/70 text-sm font-light">Email General</p>
+                                <a
+                                    href={`mailto:${generalContact.email}`}
+                                    className="text-white font-light hover:text-white/90 transition-colors duration-300"
+                                >
+                                    {generalContact.email}
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -220,6 +291,24 @@ const ContactSection = () => {
                                         className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-2xl text-white placeholder-white/50 focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all duration-300 font-light backdrop-blur-sm"
                                         placeholder="+54 9 351 123-4567"
                                     />
+                                </div>
+
+                                {/* Local Preference */}
+                                <div>
+                                    <label className="block text-sm font-light text-white/90 mb-3">
+                                        Local de Preferencia
+                                    </label>
+                                    <select
+                                        name="local"
+                                        value={formData.local}
+                                        onChange={handleFormChange}
+                                        className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-2xl text-white focus:ring-2 focus:ring-white/40 focus:border-white/40 transition-all duration-300 font-light backdrop-blur-sm"
+                                    >
+                                        <option value="" className="bg-blue-600">Seleccionar local</option>
+                                        <option value="centro" className="bg-blue-600">Local Centro</option>
+                                        <option value="nueva-cordoba" className="bg-blue-600">Local Nueva Córdoba</option>
+                                        <option value="cualquiera" className="bg-blue-600">Cualquier local</option>
+                                    </select>
                                 </div>
 
                                 {/* Message Textarea */}

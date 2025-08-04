@@ -27,8 +27,8 @@ const EnhancedNavbar = () => {
         };
     }, []);
 
-    const logoDefault = isMobile ? '/logos/logotipo-reducido-1.svg' : '/logos/logotipo-3.svg';
-    const logoScrolled = isMobile ? '/logos/logotipo-reducido-2.svg' : '/logos/logotipo-2.svg';
+    const logoDefault = isMobile ? '/logos/logotipo-reducido-1.svg' : '/logos/logo_1.svg';
+    const logoScrolled = isMobile ? '/logos/logotipo-reducido-2.svg' : '/logos/logo_2.svg';
     const menuItems = ['Inicio', 'Marcas', 'Productos', 'Nosotros', 'Galería'];
 
     return (
@@ -42,7 +42,7 @@ const EnhancedNavbar = () => {
                 <div className="container mx-auto px-6">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <div className="relative w-15 sm:w-20 md:w-40 lg:w-60 h-12 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                        <div className="relative w-20 sm:w-25 md:w-40 lg:w-60 h-20 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                             <div
                                 className={`absolute inset-0 transition-all duration-700 ease-in-out ${isScrolled
                                     ? "opacity-100 translate-y-0 scale-100"

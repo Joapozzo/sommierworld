@@ -3,7 +3,7 @@ import { Phone, MessageCircle, MapPin, Mail } from 'lucide-react';
 
 const Footer = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const footerRef = useRef(null);
+    const footerRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -28,28 +28,26 @@ const Footer = () => {
         { name: 'Deseo', description: 'Innovación y diseño' }
     ];
 
-    const contactInfo = [
+    const sucursales = [
         {
-            icon: Phone,
-            label: '+54 351 123-4567',
-            href: 'tel:+543511234567'
+            name: 'Sucursal Centro',
+            address: 'Av. General Paz 123, Centro, Córdoba',
+            phone: '+54 351 423-7650',
+            whatsapp: '+54 9 351 423-7650',
+            coordinates: '31°24\'14.2"S 64°11\'07.1"W'
         },
         {
-            icon: MessageCircle,
-            label: 'WhatsApp Disponible',
-            href: '#'
-        },
-        {
-            icon: Mail,
-            label: 'info@descansopremiun.com',
-            href: 'mailto:info@descansopremiun.com'
-        },
-        {
-            icon: MapPin,
-            label: 'Córdoba, Argentina',
-            href: '#'
+            name: 'Sucursal Nueva Córdoba',
+            address: 'Av. Hipólito Yrigoyen 567, Nueva Córdoba',
+            phone: '+54 351 756-9380',
+            whatsapp: '+54 9 351 756-9380',
+            coordinates: '31°25\'32.1"S 64°11\'45.2"W'
         }
     ];
+
+    const generalContact = {
+        email: 'info@sommierworld.com'
+    };
 
     return (
         <footer
@@ -65,7 +63,7 @@ const Footer = () => {
             <div className="relative z-10">
                 {/* Main Content */}
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 max-w-7xl mx-auto">
 
                         {/* Company Info */}
                         <div
@@ -84,8 +82,135 @@ const Footer = () => {
                                 asesoramiento experto y cuidado personalizado desde hace más de 20 años.
                             </p>
 
+                            {/* Email General */}
+                            <div className="group flex items-center space-x-3 mb-6">
+                                <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                    <Mail className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                </div>
+                                <a
+                                    href={`mailto:${generalContact.email}`}
+                                    className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
+                                >
+                                    {generalContact.email}
+                                </a>
+                            </div>
+
                             {/* Decorative Element */}
                             <div className="w-16 h-px bg-gradient-to-r from-blue-400 to-transparent"></div>
+                        </div>
+
+                        {/* Sucursal Centro */}
+                        <div
+                            className={`transition-all duration-700 transform ${isVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-8'
+                                }`}
+                            style={{ transitionDelay: '400ms' }}
+                        >
+                            <h4 className="text-lg sm:text-xl font-light mb-6 text-white">
+                                {sucursales[0].name}
+                            </h4>
+                            <div className="space-y-4">
+                                {/* Dirección */}
+                                <div className="group flex items-start space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 flex-shrink-0 mt-1">
+                                        <MapPin className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <div>
+                                        <span className="text-white/80 font-light block leading-relaxed">
+                                            {sucursales[0].address}
+                                        </span>
+                                        <span className="text-white/50 text-sm font-light">
+                                            {sucursales[0].coordinates}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Teléfono */}
+                                <div className="group flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                        <Phone className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <a
+                                        href={`tel:${sucursales[0].phone.replace(/\s/g, '')}`}
+                                        className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
+                                    >
+                                        {sucursales[0].phone}
+                                    </a>
+                                </div>
+
+                                {/* WhatsApp */}
+                                <div className="group flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                        <MessageCircle className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <a
+                                        href={`https://wa.me/${sucursales[0].whatsapp.replace(/\s/g, '').replace('+', '')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
+                                    >
+                                        WhatsApp Centro
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sucursal Nueva Córdoba */}
+                        <div
+                            className={`transition-all duration-700 transform ${isVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-8'
+                                }`}
+                            style={{ transitionDelay: '600ms' }}
+                        >
+                            <h4 className="text-lg sm:text-xl font-light mb-6 text-white">
+                                {sucursales[1].name}
+                            </h4>
+                            <div className="space-y-4">
+                                {/* Dirección */}
+                                <div className="group flex items-start space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 flex-shrink-0 mt-1">
+                                        <MapPin className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <div>
+                                        <span className="text-white/80 font-light block leading-relaxed">
+                                            {sucursales[1].address}
+                                        </span>
+                                        <span className="text-white/50 text-sm font-light">
+                                            {sucursales[1].coordinates}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Teléfono */}
+                                <div className="group flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                        <Phone className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <a
+                                        href={`tel:${sucursales[1].phone.replace(/\s/g, '')}`}
+                                        className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
+                                    >
+                                        {sucursales[1].phone}
+                                    </a>
+                                </div>
+
+                                {/* WhatsApp */}
+                                <div className="group flex items-center space-x-3">
+                                    <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                        <MessageCircle className="w-4 h-4 text-white/80 group-hover:text-white transition-all duration-300" />
+                                    </div>
+                                    <a
+                                        href={`https://wa.me/${sucursales[1].whatsapp.replace(/\s/g, '').replace('+', '')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
+                                    >
+                                        WhatsApp N. Córdoba
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                         {/* Partners */}
@@ -94,7 +219,7 @@ const Footer = () => {
                                     ? 'opacity-100 translate-y-0'
                                     : 'opacity-0 translate-y-8'
                                 }`}
-                            style={{ transitionDelay: '400ms' }}
+                            style={{ transitionDelay: '800ms' }}
                         >
                             <h4 className="text-lg sm:text-xl font-light mb-6 text-white">
                                 Nuestros Socios
@@ -105,7 +230,7 @@ const Footer = () => {
                                         key={index}
                                         className={`group flex items-center space-x-3 transition-all duration-500 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
                                             } hover:translate-x-2`}
-                                        style={{ transitionDelay: `${500 + index * 100}ms` }}
+                                        style={{ transitionDelay: `${900 + index * 100}ms` }}
                                     >
                                         <div className="w-2 h-2 bg-blue-400 rounded-full group-hover:scale-150 group-hover:bg-blue-300 transition-all duration-300"></div>
                                         <div>
@@ -120,40 +245,6 @@ const Footer = () => {
                                 ))}
                             </div>
                         </div>
-
-                        {/* Contact */}
-                        <div
-                            className={`transition-all duration-700 transform ${isVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-8'
-                                }`}
-                            style={{ transitionDelay: '600ms' }}
-                        >
-                            <h4 className="text-lg sm:text-xl font-light mb-6 text-white">
-                                Contacto
-                            </h4>
-                            <div className="space-y-4">
-                                {contactInfo.map((info, index) => {
-                                    const Icon = info.icon;
-                                    return (
-                                        <a
-                                            key={index}
-                                            href={info.href}
-                                            className={`group flex items-center space-x-3 transition-all duration-500 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
-                                                } hover:translate-x-2`}
-                                            style={{ transitionDelay: `${700 + index * 100}ms` }}
-                                        >
-                                            <div className="w-8 h-8 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 group-hover:scale-110">
-                                                <Icon className="w-4 h-4 text-white/80 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
-                                            </div>
-                                            <span className="text-white/80 font-light group-hover:text-white transition-colors duration-300">
-                                                {info.label}
-                                            </span>
-                                        </a>
-                                    );
-                                })}
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -166,7 +257,7 @@ const Footer = () => {
                             ? 'opacity-100 translate-y-0'
                             : 'opacity-0 translate-y-4'
                         }`}
-                    style={{ transitionDelay: '1000ms' }}
+                    style={{ transitionDelay: '1200ms' }}
                 >
                     <div className="text-center">
                         <p className="text-white/60 font-light text-sm sm:text-base">
