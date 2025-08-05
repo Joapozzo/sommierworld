@@ -42,7 +42,7 @@ const EnhancedNavbar = () => {
                 <div className="container mx-auto px-6">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <div className="relative w-20 sm:w-25 md:w-40 lg:w-60 h-20 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                        <div className="relative w-20 sm:w-20 md:w-30 lg:w-30 h-15 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                             <div
                                 className={`absolute inset-0 transition-all duration-700 ease-in-out ${isScrolled
                                     ? "opacity-100 translate-y-0 scale-100"
