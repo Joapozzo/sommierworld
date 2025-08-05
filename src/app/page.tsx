@@ -16,9 +16,9 @@ const LuxuryMattressLanding = () => {
     <div className="min-h-screen bg-white font-sans">
       <NavbarHeroSection/>
       <StatsSection/>
+      <MultimediaSection/>
       <BrandsSection/>
       <ProductsSection/>
-      <MultimediaSection/>
       <AboutSection/>
       <ServiceSection/>
       <GallerySection/>
