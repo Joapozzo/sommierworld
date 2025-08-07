@@ -10,6 +10,7 @@ import GallerySection from './components/GallerySection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import MultimediaSection from './components/MultimediaSection';
+import WhatsAppButton from './components/WhatsAppButton';
 
 const LuxuryMattressLanding = () => {
   return (
@@ -24,6 +25,7 @@ const LuxuryMattressLanding = () => {
       <GallerySection/>
       <ContactSection/>
       <Footer/>
+      <WhatsAppButton/>
     </div>
   );
 };

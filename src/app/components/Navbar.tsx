@@ -31,6 +31,10 @@ const EnhancedNavbar = () => {
     const logoScrolled = isMobile ? '/logos/logotipo-reducido-2.svg' : '/logos/logo_2.svg';
     const menuItems = ['Inicio', 'Marcas', 'Productos', 'Nosotros', 'Galería'];
 
+    const handleGoToWhp = () => {
+        window.open("https://wa.me/5493514237650?text=Hola Sommier World! Me gustaria contactarme con un asesor", "_blank");
+    };
+
     return (
         <>
             <nav
@@ -92,7 +96,7 @@ const EnhancedNavbar = () => {
 
                         {/* Contact Button */}
                         <div className="hidden lg:block">
-                            <Button>Contactar</Button>
+                            <Button onClick={handleGoToWhp}>Contactar</Button>
                         </div>
 
                         {/* Mobile Menu Button */}
