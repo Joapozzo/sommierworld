@@ -5,6 +5,12 @@ import Button from './ui/Button';
 import { ArrowRight } from 'lucide-react';
 
 const NavbarHeroSection = () => {
+  const goToSection = (section: string) => {
+    window.scrollTo({
+      top: document.getElementById(section)?.offsetTop,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div className="relative min-h-screen" id="inicio">
       <EnhancedNavbar />
@@ -52,21 +58,22 @@ const NavbarHeroSection = () => {
                   size="md"
                   fullWidth={true}
                   className="order-1"
-                  onClick={() => { }}
+                  onClick={() => goToSection('productos')}
+
                 >
                   Explorar Colección
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
-                <Button
+                {/* <Button
                   variant="white"
                   outline={true}
                   size="md"
                   fullWidth={true}
                   className="order-2"
-                  onClick={() => { }}
+                  onClick={() => goToSection('consulta-personalizada')}
                 >
                   Consulta Personalizada
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>
@@ -94,14 +101,14 @@ const NavbarHeroSection = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-end animate-slide-up-delayed">
                 <Button
                   variant="primary"
-                  size="sm"
+                  size="md"
                   fullWidth={true}
-                  onClick={() => { }}
+                  onClick={() => goToSection('productos')}
                 >
                   Explorar Colección
                   <ArrowRight className="w-5 h-5" />
                 </Button>
-                <Button
+                {/* <Button
                   variant="white"
                   outline={true}
                   size="sm"
@@ -109,7 +116,7 @@ const NavbarHeroSection = () => {
                   onClick={() => { }}
                 >
                   Consulta Personalizada
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

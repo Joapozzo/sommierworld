@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Button from './ui/Button';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { useSendEmail } from '../hooks/useSendEmail';
 
 const ContactSection = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [selectedLocal, setSelectedLocal] = useState(0);
+    const { sendEmail, loading, error, success } = useSendEmail();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -39,9 +41,8 @@ const ContactSection = () => {
         }));
     };
 
-    const handleSubmit = () => {
-        console.log('Form submitted:', formData);
-        // Aquí iría la lógica de envío del formulario
+    const handleSubmit = async () => {
+        await sendEmail(formData);
     };
 
     const locales = [
@@ -66,7 +67,7 @@ const ContactSection = () => {
     ];
 
     const generalContact = {
-        email: 'info@sommierworld.com'
+        email: 'contacto@sommierworld.com'
     };
 
     return (
@@ -137,7 +138,7 @@ const ContactSection = () => {
                             Nuestros Locales
                         </h3>
                         <p className="text-white/90 font-light leading-relaxed mb-10 lg:mb-12 text-lg">
-                            Visitanos en cualquiera de nuestros dos locales en Córdoba. Cada uno cuenta con 
+                            Visitanos en cualquiera de nuestros dos locales en Córdoba. Cada uno cuenta con
                             expertos especializados para ayudarte a encontrar el descanso perfecto.
                         </p>
 
@@ -147,11 +148,10 @@ const ContactSection = () => {
                                 <button
                                     key={index}
                                     onClick={() => setSelectedLocal(index)}
-                                    className={`flex-1 py-3 px-6 rounded-xl font-light transition-all duration-300 ${
-                                        selectedLocal === index
-                                            ? 'bg-white text-blue-600 shadow-lg'
-                                            : 'text-white/80 hover:text-white hover:bg-white/10'
-                                    }`}
+                                    className={`flex-1 py-3 px-6 rounded-xl font-light transition-all duration-300 ${selectedLocal === index
+                                        ? 'bg-white text-blue-600 shadow-lg'
+                                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                                        }`}
                                 >
                                     {local.name}
                                 </button>
@@ -161,7 +161,7 @@ const ContactSection = () => {
                         {/* Local seleccionado */}
                         <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 mb-8">
                             <h4 className="text-2xl font-normal text-white mb-6">{locales[selectedLocal].name}</h4>
-                            
+
                             <div className="space-y-6">
                                 {/* Dirección */}
                                 <div className="group flex items-start space-x-4">
@@ -333,10 +333,14 @@ const ContactSection = () => {
                                     fullWidth
                                     onClick={handleSubmit}
                                     className="mt-8"
+                                    disabled={formData.name === '' || formData.email === '' || formData.message === '' || loading}
                                 >
                                     <Send className="w-5 h-5" />
-                                    Enviar Consulta
+                                    {loading ? 'Enviando...' : 'Enviar Consulta'}
                                 </Button>
+
+                                {success && <p className="text-green-400 mt-2 text-center">¡Mensaje enviado correctamente!</p>}
+                                {error && <p className="text-red-200 mt-2 text-center">{error}</p>}
                             </div>
                         </div>
                     </div>

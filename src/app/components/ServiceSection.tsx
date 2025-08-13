@@ -110,7 +110,7 @@ const ServiceSection = () => {
                             >
                                 <div className="relative">
                                     {/* Card */}
-                                    <div className="bg-white/10 backdrop-blur-sm p-8 sm:p-8 lg:p-12 rounded-3xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-500 transform group-hover:-translate-y-2 group-hover:scale-105 h-full min-h-[450px] sm:min-h-[300px] lg:min-h-[400px] md:min-h-[450px] xl:min-h-[450px]">
+                                    <div className="bg-white/10 backdrop-blur-sm p-8 sm:p-8 lg:p-12 rounded-3xl border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-500 transform group-hover:-translate-y-2 group-hover:scale-105 h-full min-h-[350px] sm:min-h-[300px] lg:min-h-[400px] md:min-h-[450px] xl:min-h-[450px]">
                                         {/* Icon Container */}
                                         <div className="relative mb-8">
                                             <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto group-hover:bg-white/30 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">

@@ -29,7 +29,7 @@ const ProductsSection = () => {
             subtitle: 'Confort Premium',
             description: 'Descubre nuestra colección de colchones diseñados para brindarte el mejor descanso. Desde tecnología de memoria hasta materiales orgánicos.',
             image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-            buttonText: 'Explorar Colchones'
+            // buttonText: 'Explorar Colchones'
         },
         {
             id: 'sommiers',
@@ -37,7 +37,7 @@ const ProductsSection = () => {
             subtitle: 'Elegancia y Soporte',
             description: 'Bases de cama que combinan funcionalidad y diseño. Perfectos para complementar tu colchón y crear el conjunto ideal para tu descanso.',
             image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-            buttonText: 'Ver Sommiers'
+            // buttonText: 'Ver Sommiers'
         },
         {
             id: 'blanco',
@@ -45,7 +45,7 @@ const ProductsSection = () => {
             subtitle: 'Textiles Premium',
             description: 'Sábanas, acolchados, fundas y toda la ropa de cama que necesitas para completar tu experiencia de descanso con el máximo confort.',
             image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-            buttonText: 'Ver Textiles'
+            // buttonText: 'Ver Textiles'
         },
         {
             id: 'almohadas',
@@ -53,7 +53,7 @@ const ProductsSection = () => {
             subtitle: 'Apoyo Perfecto',
             description: 'Una amplia variedad de almohadas con diferentes materiales y firmezas para garantizar el soporte ideal para tu cabeza y cuello.',
             image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-            buttonText: 'Explorar Almohadas'
+            // buttonText: 'Explorar Almohadas'
         }
     ];
 
@@ -64,7 +64,7 @@ const ProductsSection = () => {
             subtitle: 'Diseño y Funcionalidad',
             description: 'Respaldos ergonómicos que transforman tu cama en un espacio de lectura y relajación, combinando estilo y comodidad.',
             image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            buttonText: 'Ver Respaldos'
+            // buttonText: 'Ver Respaldos'
         },
         {
             id: 'bauleras',
@@ -72,7 +72,7 @@ const ProductsSection = () => {
             subtitle: 'Almacenamiento Elegante',
             description: 'Soluciones de almacenamiento prácticas y elegantes que optimizan el espacio de tu dormitorio sin comprometer el estilo.',
             image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            buttonText: 'Ver Accesorios'
+            // buttonText: 'Ver Accesorios'
         }
     ];
 
@@ -139,7 +139,7 @@ const ProductsSection = () => {
                                     </p>
 
                                     {/* Button */}
-                                    <div className="transform transition-all duration-300 group-hover:scale-105">
+                                    {/* <div className="transform transition-all duration-300 group-hover:scale-105">
                                         <Button
                                             variant="white"
                                             outline
@@ -148,7 +148,7 @@ const ProductsSection = () => {
                                         >
                                             {category.buttonText}
                                         </Button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -219,14 +219,14 @@ const ProductsSection = () => {
 
                                         {/* Button */}
                                         <div className="transform transition-all duration-300 group-hover:scale-105">
-                                            <Button
+                                            {/* <Button
                                                 variant="white"
                                                 outline
                                                 size="sm"
                                                 className="backdrop-blur-sm"
                                             >
                                                 {accessory.buttonText}
-                                            </Button>
+                                            </Button> */}
                                         </div>
                                     </div>
                                 </div>
