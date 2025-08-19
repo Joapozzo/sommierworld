@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Play, Volume2, Eye, PlayCircle } from 'lucide-react';
 
 const MultimediaSection = () => {
-    const URI_BASE_VIDEOS = process.env.NEXT_PUBLIC_CLOUDINARY_VIDEOS_BASE;
-
     const [isVisible, setIsVisible] = useState(false);
     const [activeVideo, setActiveVideo] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
@@ -59,7 +57,7 @@ const MultimediaSection = () => {
                     setTimeout(() => animateCount(0, 89, 2000, 'shares'), 700);
                 }
             },
-            { threshold: 0.3 }
+            { threshold: 0.1 } // 🔥 CAMBIAR A 0.1
         );
 
         if (sectionRef.current) {
@@ -68,6 +66,68 @@ const MultimediaSection = () => {
 
         return () => observer.disconnect();
     }, [isVisible]);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
+        // 🔥 ACTIVAR VIDEOS CUANDO LA SECCIÓN SEA VISIBLE
+        const activateAllVideos = () => {
+            videoRefs.current.forEach((video, index) => {
+                if (video && !videoErrors[index]) {
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.setAttribute('webkit-playsinline', 'true');
+                    video.setAttribute('x5-playsinline', 'true');
+
+                    const playVideo = async () => {
+                        try {
+                            await video.play();
+                            console.log(`✅ Video ${index} playing`);
+                        } catch (error) {
+                            console.log(`❌ Video ${index} failed:`, error);
+                        }
+                    };
+
+                    // Intentar reproducir inmediatamente
+                    playVideo();
+
+                    // Reintento cada segundo
+                    const interval = setInterval(() => {
+                        if (video.paused) {
+                            playVideo();
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 1000);
+
+                    // Limpiar después de 10 segundos
+                    setTimeout(() => clearInterval(interval), 10000);
+                }
+            });
+        };
+
+        // Activar después de que la sección sea visible
+        setTimeout(activateAllVideos, 500);
+
+        // 🔥 LISTENER GLOBAL PARA CUALQUIER INTERACCIÓN
+        const handleInteraction = () => {
+            activateAllVideos();
+            // Remover listeners
+            document.removeEventListener('touchstart', handleInteraction);
+            document.removeEventListener('click', handleInteraction);
+            document.removeEventListener('scroll', handleInteraction);
+        };
+
+        document.addEventListener('touchstart', handleInteraction, { passive: true });
+        document.addEventListener('click', handleInteraction);
+        document.addEventListener('scroll', handleInteraction, { passive: true });
+
+        return () => {
+            document.removeEventListener('touchstart', handleInteraction);
+            document.removeEventListener('click', handleInteraction);
+            document.removeEventListener('scroll', handleInteraction);
+        };
+    }, [isVisible, videoErrors]);
 
     const videos = [
         {
@@ -94,28 +154,38 @@ const MultimediaSection = () => {
     ];
 
     const handleVideoHover = (index: number) => {
-        // Solo reproducir automáticamente en desktop
-        if (!isMobile && !videoErrors[index]) {
-            setActiveVideo(index);
-            if (videoRefs.current[index]) {
-                const video = videoRefs.current[index];
-                const playPromise = video?.play();
+        setActiveVideo(index);
 
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        setVideoErrors(prev => ({ ...prev, [index]: true }));
-                    });
-                }
+        // 🔥 REPRODUCIR EN AMBOS DISPOSITIVOS
+        if (!videoErrors[index] && videoRefs.current[index]) {
+            const video = videoRefs.current[index];
+            video.muted = true;
+            const playPromise = video?.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    setVideoErrors(prev => ({ ...prev, [index]: true }));
+                });
             }
         }
     };
 
     const handleVideoLeave = (index: number) => {
+        // 🔥 NUNCA PAUSAR EN MÓVILES - SIEMPRE REPRODUCIÉNDOSE
         if (!isMobile) {
             setActiveVideo(null);
             if (videoRefs.current[index]) {
                 videoRefs.current[index]?.pause();
             }
+        }
+    };
+
+    const handleVideoLoadedData = (index: number) => {
+        // 🔥 REPRODUCIR INMEDIATAMENTE AL CARGAR
+        if (videoRefs.current[index]) {
+            const video = videoRefs.current[index];
+            video.muted = true;
+            video.play().catch(console.log);
         }
     };
 
@@ -234,20 +304,24 @@ const MultimediaSection = () => {
                                         </div>
                                     ) : (
                                         <video
-                                            ref={(el) => {
-                                                videoRefs.current[index] = el;
-                                            }}
+                                            ref={(el) => { videoRefs.current[index] = el; }}
                                             src={video.src}
                                             poster={video.poster}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                            muted
+                                            muted={true}
                                             loop
                                             autoPlay
                                             playsInline
-                                            preload={isMobile ? "none" : "metadata"}
+                                            preload="auto"
                                             onError={() => handleVideoError(index)}
+                                            onLoadedData={() => handleVideoLoadedData(index)} // 🔥 NUEVO
                                             onLoadStart={() => {
                                                 setVideoErrors(prev => ({ ...prev, [index]: false }));
+                                            }}
+                                            onCanPlay={() => {
+                                                if (videoRefs.current[index]?.paused) {
+                                                    videoRefs.current[index]?.play().catch(console.log);
+                                                }
                                             }}
                                         />
                                     )}
