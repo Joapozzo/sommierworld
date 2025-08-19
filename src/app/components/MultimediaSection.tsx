@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Volume2, Eye } from 'lucide-react';
+import { Play, Volume2, Eye, PlayCircle } from 'lucide-react';
 
 const MultimediaSection = () => {
+    const URI_BASE_VIDEOS = process.env.NEXT_PUBLIC_CLOUDINARY_VIDEOS_BASE;
+
     const [isVisible, setIsVisible] = useState(false);
     const [activeVideo, setActiveVideo] = useState<number | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [videoErrors, setVideoErrors] = useState<{ [key: number]: boolean }>({});
     const [counts, setCounts] = useState({
         views: 0,
         engagement: 0,
@@ -11,6 +15,20 @@ const MultimediaSection = () => {
     });
     const sectionRef = useRef<HTMLElement>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+    // Detectar dispositivos móviles
+    useEffect(() => {
+        const checkMobile = () => {
+            const userAgent = navigator.userAgent || navigator.vendor;
+            const isMobileDevice = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase()) ||
+                window.innerWidth <= 768;
+            setIsMobile(isMobileDevice);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
         const animateCount = (
@@ -53,19 +71,22 @@ const MultimediaSection = () => {
 
     const videos = [
         {
-            src: "/videos/video-1.mp4",
+            src: "https://res.cloudinary.com/dqafurpsp/video/upload/v1755631601/sw-video-1_smilq4.mp4",
+            poster: "/images/video-1-poster.jpg", // Imagen de poster
             title: "Transformación Moderna",
             description: "Espacios que reflejan personalidad",
             category: "Diseño Interior"
         },
         {
-            src: "/videos/video-2.mp4",
+            src: `https://res.cloudinary.com/dqafurpsp/video/upload/v1755631604/sw-video-2_mmq2jo.mp4`,
+            poster: "/images/video-2-poster.jpg",
             title: "Elegancia Minimalista",
             description: "Simplicidad con carácter único",
             category: "Estilo Contemporáneo"
         },
         {
-            src: "/videos/video-3.mp4",
+            src: `https://res.cloudinary.com/dqafurpsp/video/upload/v1755631602/sw-video-3_wsjfck.mp4`,
+            poster: "/images/video-3-poster.jpg",
             title: "Ambiente Acogedor",
             description: "Calidez en cada detalle",
             category: "Decoración"
@@ -73,23 +94,58 @@ const MultimediaSection = () => {
     ];
 
     const handleVideoHover = (index: number) => {
-        setActiveVideo(index);
-        if (videoRefs.current[index]) {
-            videoRefs.current[index]?.play();
+        // Solo reproducir automáticamente en desktop
+        if (!isMobile && !videoErrors[index]) {
+            setActiveVideo(index);
+            if (videoRefs.current[index]) {
+                const video = videoRefs.current[index];
+                const playPromise = video?.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        setVideoErrors(prev => ({ ...prev, [index]: true }));
+                    });
+                }
+            }
         }
     };
 
     const handleVideoLeave = (index: number) => {
-        setActiveVideo(null);
-        if (videoRefs.current[index]) {
-            videoRefs.current[index]?.pause();
+        if (!isMobile) {
+            setActiveVideo(null);
+            if (videoRefs.current[index]) {
+                videoRefs.current[index]?.pause();
+            }
         }
+    };
+
+    const handleVideoClick = (index: number) => {
+        // En mobile, permitir click para reproducir
+        if (isMobile || videoErrors[index]) {
+            if (videoRefs.current[index]) {
+                const video = videoRefs.current[index];
+                if (video?.paused) {
+                    setActiveVideo(index);
+                    video.play().catch(() => {
+                        setVideoErrors(prev => ({ ...prev, [index]: true }));
+                    });
+                } else {
+                    setActiveVideo(null);
+                    video.pause();
+                }
+            }
+        }
+    };
+
+    const handleVideoError = (index: number) => {
+        console.warn(`Error loading video ${index}`);
+        setVideoErrors(prev => ({ ...prev, [index]: true }));
     };
 
     const stats = [
         {
             icon: Eye,
-            title: 'K Visualizaciones',
+            title: 'Visualizaciones',
             value: counts.views,
             suffix: 'K+',
         },
@@ -150,26 +206,51 @@ const MultimediaSection = () => {
                         {videos.map((video, index) => (
                             <div
                                 key={index}
-                                className={`group relative transition-all duration-700 transform ${isVisible
-                                        ? 'opacity-100 translate-y-0'
-                                        : 'opacity-0 translate-y-12'
+                                className={`group relative transition-all duration-700 transform cursor-pointer ${isVisible
+                                    ? 'opacity-100 translate-y-0'
+                                    : 'opacity-0 translate-y-12'
                                     }`}
                                 style={{ transitionDelay: `${400 + index * 200}ms` }}
                                 onMouseEnter={() => handleVideoHover(index)}
                                 onMouseLeave={() => handleVideoLeave(index)}
+                                onClick={() => handleVideoClick(index)}
                             >
                                 {/* Video Container */}
                                 <div className="relative aspect-[9/16] rounded-3xl overflow-hidden shadow-xl group-hover:shadow-2xl transition-all duration-500">
-                                    <video
-                                        ref={(el) => {
-                                            videoRefs.current[index] = el;
-                                        }}
-                                        src={video.src}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                        muted
-                                        loop
-                                        playsInline
-                                    />
+                                    {videoErrors[index] ? (
+                                        // Fallback para errores de video
+                                        <div
+                                            className="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"
+                                            style={{
+                                                backgroundImage: video.poster ? `url(${video.poster})` : undefined,
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center'
+                                            }}
+                                        >
+                                            <div className="text-white text-center">
+                                                <PlayCircle className="w-16 h-16 mx-auto mb-4 opacity-80" />
+                                                <p className="text-sm opacity-90">Video no disponible</p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <video
+                                            ref={(el) => {
+                                                videoRefs.current[index] = el;
+                                            }}
+                                            src={video.src}
+                                            poster={video.poster}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                            muted
+                                            loop
+                                            autoPlay
+                                            playsInline
+                                            preload={isMobile ? "none" : "metadata"}
+                                            onError={() => handleVideoError(index)}
+                                            onLoadStart={() => {
+                                                setVideoErrors(prev => ({ ...prev, [index]: false }));
+                                            }}
+                                        />
+                                    )}
 
                                     {/* Overlay */}
                                     <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 ${activeVideo === index ? 'opacity-100' : 'opacity-60'
@@ -183,12 +264,21 @@ const MultimediaSection = () => {
                                         </div>
 
                                         {/* Play Icon */}
-                                        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${activeVideo === index ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
+                                        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${activeVideo === index && !isMobile ? 'scale-0 opacity-0' : 'scale-100 opacity-100'
                                             }`}>
                                             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                                                 <Play className="w-6 h-6 text-white ml-1" />
                                             </div>
                                         </div>
+
+                                        {/* Mobile Click Indicator */}
+                                        {isMobile && (
+                                            <div className="absolute bottom-20 right-4">
+                                                <div className="px-2 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded">
+                                                    Toca para reproducir
+                                                </div>
+                                            </div>
+                                        )}
 
                                         {/* Content */}
                                         <div className={`absolute bottom-4 left-4 right-4 text-white transition-all duration-500 ${activeVideo === index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-80'
@@ -217,8 +307,8 @@ const MultimediaSection = () => {
                                 <div
                                     key={index}
                                     className={`group text-center transition-all duration-700 transform ${isVisible
-                                            ? 'opacity-100 translate-y-0'
-                                            : 'opacity-0 translate-y-12'
+                                        ? 'opacity-100 translate-y-0'
+                                        : 'opacity-0 translate-y-12'
                                         }`}
                                     style={{ transitionDelay: `${1000 + index * 200}ms` }}
                                 >
@@ -251,8 +341,8 @@ const MultimediaSection = () => {
                     {/* Bottom decorative element */}
                     <div
                         className={`mt-16 sm:mt-20 flex justify-center transition-all duration-1000 transform ${isVisible
-                                ? 'opacity-100 translate-y-0'
-                                : 'opacity-0 translate-y-8'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-8'
                             }`}
                         style={{ transitionDelay: '1400ms' }}
                     >
