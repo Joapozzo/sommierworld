@@ -20,9 +20,9 @@ const LuxuryMattressLanding = () => {
       <MultimediaSection/>
       <BrandsSection/>
       <ProductsSection/>
-      <AboutSection/>
+      {/* <AboutSection/> */}
       <ServiceSection/>
-      <GallerySection/>
+      {/* <GallerySection/> */}
       <ContactSection/>
       <Footer/>
       <WhatsAppButton/>

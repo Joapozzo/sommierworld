@@ -30,8 +30,8 @@ const ServiceSection = () => {
         },
         {
             icon: Clock,
-            title: 'Período de Prueba',
-            description: 'Tómate el tiempo necesario para asegurar que tu elección es perfecta. Incluye opciones flexibles de intercambio.'
+            title: 'Post Venta',
+            description: 'Después de tu compra seguimos acompañándote. Si surge algún inconveniente, lo resolvemos de inmediato para que disfrutes tu colchón sin preocupaciones.'
         },
         {
             icon: MessageCircle,
@@ -44,14 +44,14 @@ const ServiceSection = () => {
         <section
             ref={sectionRef}
             id="service"
-            className="w-full py-15 sm:py-20 lg:py-25 bg-blue-600 relative overflow-hidden"
+            className="w-full py-15 sm:py-20 lg:py-25 bg-blue-600 relative"
         >
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
+            {/* <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-48 -translate-y-48"></div>
                 <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-48 translate-y-48"></div>
                 <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-white rounded-full -translate-y-32"></div>
-            </div>
+            </div> */}
 
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
@@ -101,8 +101,8 @@ const ServiceSection = () => {
                             <div
                                 key={index}
                                 className={`group text-center transition-all duration-700 transform ${isVisible
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-12"
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-12"
                                     }`}
                                 style={{
                                     transitionDelay: `${500 + index * 150}ms`,

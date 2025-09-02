@@ -27,9 +27,9 @@ const EnhancedNavbar = () => {
         };
     }, []);
 
-    const logoDefault = isMobile ? '/logos/logotipo-reducido-1.svg' : '/logos/logo_1.svg';
-    const logoScrolled = isMobile ? '/logos/logotipo-reducido-2.svg' : '/logos/logo_2.svg';
-    const menuItems = ['Inicio', 'Marcas', 'Productos', 'Nosotros', 'Galería'];
+    const logoDefault = isMobile ? '/logos/logo_1.svg' : '/logos/logo_1.svg';
+    const logoScrolled = isMobile ? '/logos/logo_2.svg' : '/logos/logo_2.svg';
+    const menuItems = ['Inicio', 'Marcas', 'Productos', 'Sucursales'];
 
     const handleGoToWhp = () => {
         window.open("https://wa.me/5493514237650?text=Hola Sommier World! Me gustaria contactarme con un asesor", "_blank");
@@ -46,7 +46,7 @@ const EnhancedNavbar = () => {
                 <div className="container mx-auto px-6">
                     <div className="flex items-center justify-between">
                         {/* Logo */}
-                        <div className="relative w-20 sm:w-20 md:w-30 lg:w-30 h-15 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                        <div className="relative w-30 sm:w-20 md:w-30 lg:w-30 h-15 overflow-hidden" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                             <div
                                 className={`absolute inset-0 transition-all duration-700 ease-in-out ${isScrolled
                                     ? "opacity-100 translate-y-0 scale-100"
@@ -103,6 +103,7 @@ const EnhancedNavbar = () => {
                         <Button
                             className="lg:hidden p-2 relative group"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            size='sm'
                         >
                             <div className="absolute inset-0 bg-blue-100 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-200 opacity-30"></div>
                             {isMenuOpen ? (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Volume2, Eye, PlayCircle } from 'lucide-react';
+import { Play, Volume2, Eye, PlayCircle, Users } from 'lucide-react';
 
 const MultimediaSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -8,8 +8,6 @@ const MultimediaSection = () => {
     const [videoErrors, setVideoErrors] = useState<{ [key: number]: boolean }>({});
     const [counts, setCounts] = useState({
         views: 0,
-        engagement: 0,
-        shares: 0
     });
     const sectionRef = useRef<HTMLElement>(null);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -52,9 +50,9 @@ const MultimediaSection = () => {
             ([entry]) => {
                 if (entry.isIntersecting && !isVisible) {
                     setIsVisible(true);
-                    setTimeout(() => animateCount(0, 125, 2000, 'views'), 300);
-                    setTimeout(() => animateCount(0, 98, 2000, 'engagement'), 500);
-                    setTimeout(() => animateCount(0, 89, 2000, 'shares'), 700);
+                    setTimeout(() => animateCount(0, 30, 2000, 'views'), 300);
+                    // setTimeout(() => animateCount(0, 98, 2000, 'engagement'), 500);
+                    // setTimeout(() => animateCount(0, 89, 2000, 'shares'), 700);
                 }
             },
             { threshold: 0.1 } // 🔥 CAMBIAR A 0.1
@@ -214,23 +212,23 @@ const MultimediaSection = () => {
 
     const stats = [
         {
-            icon: Eye,
-            title: 'Visualizaciones',
+            icon: Users,
+            title: 'Seguidores en redes sociales',
             value: counts.views,
-            suffix: 'K+',
+            suffix: 'K',
         },
-        {
-            icon: Play,
-            title: '% Engagement',
-            value: counts.engagement,
-            suffix: '%',
-        },
-        {
-            icon: Volume2,
-            title: '% Contenido Compartido',
-            value: counts.shares,
-            suffix: '%',
-        }
+        // {
+        //     icon: Play,
+        //     title: '% Engagement',
+        //     value: counts.engagement,
+        //     suffix: '%',
+        // },
+        // {
+        //     icon: Volume2,
+        //     title: '% Contenido Compartido',
+        //     value: counts.shares,
+        //     suffix: '%',
+        // }
     ];
 
     return (
@@ -374,7 +372,7 @@ const MultimediaSection = () => {
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
                         {stats.map((stat, index) => {
                             const Icon = stat.icon;
                             return (

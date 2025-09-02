@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Award, Shield, Star } from 'lucide-react';
+import { Award, Shield, Star, Instagram } from 'lucide-react';
 import Image from 'next/image';
+import Button from './ui/Button';
 
 const BrandsSection = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
 
-    // Observer para detectar cuando la sección está visible
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -24,6 +24,10 @@ const BrandsSection = () => {
         return () => observer.disconnect();
     }, [isVisible]);
 
+    const handleVerMas = () => {
+        window.open('https://instagram.com/sommierworld', '_blank');
+    };
+
     const brands = [
         {
             logo: '/logos/naturalsoft.svg',
@@ -32,7 +36,7 @@ const BrandsSection = () => {
             description: 'Materiales 100% orgánicos y tecnología de vanguardia. Natural Soft representa la perfecta armonía entre la pureza de la naturaleza y el confort moderno.',
             icon: Shield,
             badge: 'Certificación Orgánica',
-            image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            image: '/imgs/natural-1.jpg'
         },
         {
             logo: '/logos/deseo.svg',
@@ -41,7 +45,7 @@ const BrandsSection = () => {
             description: 'Diseños exclusivos que transforman el descanso en una experiencia única. Deseo combina elegancia contemporánea con tecnología avanzada para el máximo confort.',
             icon: Star,
             badge: 'Diseño Exclusivo',
-            image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            image: '/imgs/deseo-1.jpg'
         },
         {
             logo: '/logos/kingkoil.svg',
@@ -50,7 +54,16 @@ const BrandsSection = () => {
             description: 'Más de 120 años de innovación en el descanso. King Koil combina tradición artesanal con tecnología avanzada para el soporte perfecto.',
             icon: Award,
             badge: '120+ años de excelencia',
-            image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            image: '/imgs/kingkoil.png'
+        },
+        {
+            logo: '/logos/inducol.svg',
+            name: 'Inducol',
+            title: 'Descanso de Calidad',
+            description: 'Descanso confortable, tecnología para dormir mejor. Lo último en materiales inteligentes para lograr colchones a la altura de tus sueños',
+            icon: Award,
+            badge: 'Productos de materiales premium',
+            image: '/imgs/inducol-1.webp'
         }
     ];
 
@@ -125,15 +138,25 @@ const BrandsSection = () => {
                                         </p>
                                     </div>
 
-                                    {/* Image */}
-                                    <div className="mb-6 overflow-hidden rounded-2xl">
+                                    {/* Image with hover overlay */}
+                                    <div className="mb-6 overflow-hidden rounded-2xl relative group/image">
                                         <Image
                                             src={brand.image}
                                             alt={`${brand.name} product`}
-                                            className="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-700"
+                                            className="w-full h-48 sm:h-56 object-cover group-hover/image:scale-105 transition-transform duration-700"
                                             width={1200}
                                             height={630}
                                         />
+                                        {/* Overlay con botón */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-blue-600/60 via-blue-400/30 to-transparent opacity-0 group-hover/image:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                            <Button
+                                                onClick={handleVerMas}
+                                                variant="primary"
+                                            >
+                                                <Instagram className="w-4 h-4" />
+                                                <span>Ver más</span>
+                                            </Button>
+                                        </div>
                                     </div>
 
                                     {/* Badge */}

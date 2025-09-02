@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Phone, MessageCircle, MapPin, Mail } from 'lucide-react';
+import { locales as sucursales } from '../utils/data';
 
 const Footer = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -25,24 +26,8 @@ const Footer = () => {
     const partners = [
         { name: 'Natural Soft', description: 'Lujo orgánico' },
         { name: 'King Koil', description: 'Tradición premium' },
-        { name: 'Deseo', description: 'Innovación y diseño' }
-    ];
-
-    const sucursales = [
-        {
-            name: 'Sucursal Centro',
-            address: 'Av. General Paz 123, Centro, Córdoba',
-            phone: '+54 351 423-7650',
-            whatsapp: '+54 9 351 423-7650',
-            coordinates: '31°24\'14.2"S 64°11\'07.1"W'
-        },
-        {
-            name: 'Sucursal Nueva Córdoba',
-            address: 'Av. Hipólito Yrigoyen 567, Nueva Córdoba',
-            phone: '+54 351 756-9380',
-            whatsapp: '+54 9 351 756-9380',
-            coordinates: '31°25\'32.1"S 64°11\'45.2"W'
-        }
+        { name: 'Deseo', description: 'Innovación y diseño' },
+        { name: 'Inducol', description: 'Descanso de calidad' },
     ];
 
     const generalContact = {
@@ -68,8 +53,8 @@ const Footer = () => {
                         {/* Company Info */}
                         <div
                             className={`lg:col-span-1 transition-all duration-700 transform ${isVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-8'
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
                                 }`}
                             style={{ transitionDelay: '200ms' }}
                         >
@@ -102,8 +87,8 @@ const Footer = () => {
                         {/* Sucursal Centro */}
                         <div
                             className={`transition-all duration-700 transform ${isVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-8'
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
                                 }`}
                             style={{ transitionDelay: '400ms' }}
                         >
@@ -150,7 +135,7 @@ const Footer = () => {
                                         rel="noopener noreferrer"
                                         className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
                                     >
-                                        WhatsApp Centro
+                                        WhatsApp Zona Norte
                                     </a>
                                 </div>
                             </div>
@@ -159,8 +144,8 @@ const Footer = () => {
                         {/* Sucursal Nueva Córdoba */}
                         <div
                             className={`transition-all duration-700 transform ${isVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-8'
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
                                 }`}
                             style={{ transitionDelay: '600ms' }}
                         >
@@ -207,7 +192,7 @@ const Footer = () => {
                                         rel="noopener noreferrer"
                                         className="text-white/80 font-light group-hover:text-white transition-colors duration-300"
                                     >
-                                        WhatsApp N. Córdoba
+                                        WhatsApp Zona Sur
                                     </a>
                                 </div>
                             </div>
@@ -216,8 +201,8 @@ const Footer = () => {
                         {/* Partners */}
                         <div
                             className={`transition-all duration-700 transform ${isVisible
-                                    ? 'opacity-100 translate-y-0'
-                                    : 'opacity-0 translate-y-8'
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
                                 }`}
                             style={{ transitionDelay: '800ms' }}
                         >
@@ -254,8 +239,8 @@ const Footer = () => {
                 {/* Copyright */}
                 <div
                     className={`container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 transition-all duration-700 transform ${isVisible
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-4'
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-4'
                         }`}
                     style={{ transitionDelay: '1200ms' }}
                 >

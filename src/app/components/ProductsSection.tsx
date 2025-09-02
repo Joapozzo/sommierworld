@@ -25,54 +25,58 @@ const ProductsSection = () => {
 
     const categories = [
         {
-            id: 'colchones',
-            title: 'Colchones',
-            subtitle: 'Confort Premium',
-            description: 'Descubre nuestra colección de colchones diseñados para brindarte el mejor descanso. Desde tecnología de memoria hasta materiales orgánicos.',
-            image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            id: "colchones",
+            title: "Colchones",
+            subtitle: "Confort Premium",
+            description:
+                "Descubre nuestra colección de colchones diseñados para brindarte el mejor descanso. Desde tecnología de memoria hasta materiales orgánicos.",
+            image: "/imgs/colchon.webp",
             // buttonText: 'Explorar Colchones'
         },
         {
-            id: 'sommiers',
-            title: 'Sommiers',
-            subtitle: 'Elegancia y Soporte',
-            description: 'Bases de cama que combinan funcionalidad y diseño. Perfectos para complementar tu colchón y crear el conjunto ideal para tu descanso.',
-            image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            id: "sommiers",
+            title: "Sommiers",
+            subtitle: "Elegancia y Soporte",
+            description:
+                "Bases de cama que combinan funcionalidad y diseño. Perfectos para complementar tu colchón y crear el conjunto ideal para tu descanso.",
+            image: "/imgs/sommier.png",
             // buttonText: 'Ver Sommiers'
         },
         {
-            id: 'blanco',
-            title: 'Ropa de Cama',
-            subtitle: 'Textiles Premium',
-            description: 'Sábanas, acolchados, fundas y toda la ropa de cama que necesitas para completar tu experiencia de descanso con el máximo confort.',
-            image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            id: "blanco",
+            title: "Ropa de Cama",
+            subtitle: "Textiles Premium",
+            description:
+                "Sábanas, acolchados, fundas y toda la ropa de cama que necesitas para completar tu experiencia de descanso con el máximo confort.",
+            image: "/imgs/ropa.jpg",
             // buttonText: 'Ver Textiles'
         },
         {
-            id: 'almohadas',
-            title: 'Almohadas',
-            subtitle: 'Apoyo Perfecto',
-            description: 'Una amplia variedad de almohadas con diferentes materiales y firmezas para garantizar el soporte ideal para tu cabeza y cuello.',
-            image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+            id: "almohadas",
+            title: "Almohadas",
+            subtitle: "Apoyo Perfecto",
+            description:
+                "Una amplia variedad de almohadas con diferentes materiales y firmezas para garantizar el soporte ideal para tu cabeza y cuello.",
+            image: "/imgs/almohada.jpg",
             // buttonText: 'Explorar Almohadas'
-        }
+        },
     ];
 
     const accessories = [
-        {
-            id: 'respaldos',
-            title: 'Respaldos',
-            subtitle: 'Diseño y Funcionalidad',
-            description: 'Respaldos ergonómicos que transforman tu cama en un espacio de lectura y relajación, combinando estilo y comodidad.',
-            image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            // buttonText: 'Ver Respaldos'
-        },
+        // {
+        //     id: 'respaldos',
+        //     title: 'Respaldos',
+        //     subtitle: 'Diseño y Funcionalidad',
+        //     description: 'Respaldos ergonómicos que transforman tu cama en un espacio de lectura y relajación, combinando estilo y comodidad.',
+        //     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        //     // buttonText: 'Ver Respaldos'
+        // },
         {
             id: 'bauleras',
             title: 'Bauleras y Pies de Cama',
             subtitle: 'Almacenamiento Elegante',
             description: 'Soluciones de almacenamiento prácticas y elegantes que optimizan el espacio de tu dormitorio sin comprometer el estilo.',
-            image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+            image: '/imgs/pie.jpg',
             // buttonText: 'Ver Accesorios'
         }
     ];
@@ -181,7 +185,7 @@ const ProductsSection = () => {
                 </div>
 
                 {/* Accessories Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8 max-w-5xl mx-auto">
                     {accessories.map((accessory, index) => (
                         <div
                             key={accessory.id}

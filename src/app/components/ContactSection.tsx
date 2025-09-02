@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Button from './ui/Button';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { useSendEmail } from '../hooks/useSendEmail';
+import { locales } from '../utils/data';
 
 const ContactSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -33,38 +34,17 @@ const ContactSection = () => {
         return () => observer.disconnect();
     }, [isVisible]);
 
-    const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+    // const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    //     const { name, value } = e.target;
+    //     setFormData(prev => ({
+    //         ...prev,
+    //         [name]: value
+    //     }));
+    // };
 
-    const handleSubmit = async () => {
-        await sendEmail(formData);
-    };
-
-    const locales = [
-        {
-            name: 'Local Centro',
-            address: 'Av. General Paz 123, Centro, Córdoba',
-            phone: '+54 351 423-7650',
-            whatsapp: '+54 9 351 423-7650',
-            coordinates: '31°24\'14.2"S 64°11\'07.1"W',
-            mapUrl: 'https://maps.google.com/?q=-31.4039,-64.1853',
-            mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.3!2d-64.1853!3d-31.4039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI0JzE0LjIiUyA2NMKwMTEnMDcuMSJX!5e0!3m2!1ses!2sar!4v1699024800000!5m2!1ses!2sar'
-        },
-        {
-            name: 'Local Nueva Córdoba',
-            address: 'Av. Hipólito Yrigoyen 567, Nueva Córdoba',
-            phone: '+54 351 756-9380',
-            whatsapp: '+54 9 351 756-9380',
-            coordinates: '31°25\'32.1"S 64°11\'45.2"W',
-            mapUrl: 'https://maps.google.com/?q=-31.4256,-64.1959',
-            mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.8!2d-64.1959!3d-31.4256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI1JzMyLjEiUyA2NMKwMTEnNDUuMiJX!5e0!3m2!1ses!2sar!4v1699024800001!5m2!1ses!2sar'
-        }
-    ];
+    // const handleSubmit = async () => {
+    //     await sendEmail(formData);
+    // };
 
     const generalContact = {
         email: 'contacto@sommierworld.com'
@@ -73,8 +53,8 @@ const ContactSection = () => {
     return (
         <section
             ref={sectionRef}
-            id="contact"
-            className="w-full py-10 sm:py-10 lg:py-15 bg-blue-600 relative overflow-hidden"
+            id="sucursales"
+            className="w-full py-10 sm:py-10 lg:py-15 bg-blue-600 relative overflow-visible"
         >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
@@ -87,59 +67,63 @@ const ContactSection = () => {
                 {/* Header */}
                 <div
                     className={`text-center mb-16 sm:mb-20 lg:mb-24 transition-all duration-700 transform ${isVisible
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-8'
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-8"
                         }`}
                 >
                     {/* Badge */}
                     <div
-                        className={`inline-block transition-all duration-500 transform ${isVisible ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
+                        className={`inline-block transition-all duration-500 transform ${isVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"
                             }`}
-                        style={{ transitionDelay: '200ms' }}
+                        style={{ transitionDelay: "200ms" }}
                     >
                         <span className="inline-block px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-light border border-white/20 mb-8">
-                            Consulta Personalizada
+                            Ubicacion
                         </span>
                     </div>
 
                     {/* Title */}
                     <h2
-                        className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6 leading-tight transition-all duration-700 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                        className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-6 leading-tight transition-all duration-700 transform ${isVisible
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-6 opacity-0"
                             }`}
-                        style={{ transitionDelay: '300ms' }}
+                        style={{ transitionDelay: "300ms" }}
                     >
-                        Déjanos
-                        <span className="block font-normal">Guiarte</span>
+                        Encontranos
+                        {/* <span className="block font-normal">Guiarte</span> */}
                     </h2>
 
                     {/* Description */}
                     <p
-                        className={`text-white/90 text-lg sm:text-xl font-light max-w-4xl mx-auto leading-relaxed transition-all duration-700 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                        className={`text-white/90 text-lg sm:text-xl font-light max-w-4xl mx-auto leading-relaxed transition-all duration-700 transform ${isVisible
+                                ? "translate-y-0 opacity-100"
+                                : "translate-y-6 opacity-0"
                             }`}
-                        style={{ transitionDelay: '400ms' }}
+                        style={{ transitionDelay: "400ms" }}
                     >
-                        Elegir el colchón perfecto es un viaje personal. Nuestros expertos en descanso
-                        están aquí para brindarte asesoramiento personalizado según tus necesidades únicas.
+                        Contamos con locales en distintos puntos de la ciudad para que
+                        elijas el más cercano y disfrutes de una atención personalizada.
                     </p>
                 </div>
 
                 {/* Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 max-w-7xl mx-auto">
-
+                <div className="grid lg:grid-cols-1 gap-12 lg:gap-16 xl:gap-20 max-w-7xl mx-auto">
                     {/* Left Column - Locales Info */}
                     <div
                         className={`transition-all duration-700 transform ${isVisible
-                            ? 'opacity-100 translate-x-0'
-                            : 'opacity-0 -translate-x-8'
+                                ? "opacity-100 translate-x-0"
+                                : "opacity-0 -translate-x-8"
                             }`}
-                        style={{ transitionDelay: '500ms' }}
+                        style={{ transitionDelay: "500ms" }}
                     >
                         <h3 className="text-2xl sm:text-3xl font-light text-white mb-6 lg:mb-8">
                             Nuestros Locales
                         </h3>
                         <p className="text-white/90 font-light leading-relaxed mb-10 lg:mb-12 text-lg">
-                            Visitanos en cualquiera de nuestros dos locales en Córdoba. Cada uno cuenta con
-                            expertos especializados para ayudarte a encontrar el descanso perfecto.
+                            Visitanos en cualquiera de nuestros dos locales en Córdoba. Cada
+                            uno cuenta con expertos especializados para ayudarte a encontrar
+                            el descanso perfecto.
                         </p>
 
                         {/* Navegación entre locales */}
@@ -149,8 +133,8 @@ const ContactSection = () => {
                                     key={index}
                                     onClick={() => setSelectedLocal(index)}
                                     className={`flex-1 py-3 px-6 rounded-xl font-light transition-all duration-300 ${selectedLocal === index
-                                        ? 'bg-white text-blue-600 shadow-lg'
-                                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                                            ? "bg-white text-blue-600 shadow-lg"
+                                            : "text-white/80 hover:text-white hover:bg-white/10"
                                         }`}
                                 >
                                     {local.name}
@@ -160,7 +144,9 @@ const ContactSection = () => {
 
                         {/* Local seleccionado */}
                         <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 mb-8">
-                            <h4 className="text-2xl font-normal text-white mb-6">{locales[selectedLocal].name}</h4>
+                            <h4 className="text-2xl font-normal text-white mb-6">
+                                {locales[selectedLocal].name}
+                            </h4>
 
                             <div className="space-y-6">
                                 {/* Dirección */}
@@ -169,7 +155,9 @@ const ContactSection = () => {
                                         <MapPin className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-white/70 text-sm font-light mb-1">Dirección</p>
+                                        <p className="text-white/70 text-sm font-light mb-1">
+                                            Dirección
+                                        </p>
                                         <a
                                             href={locales[selectedLocal].mapUrl}
                                             target="_blank"
@@ -190,9 +178,14 @@ const ContactSection = () => {
                                         <Phone className="w-6 h-6 text-white" />
                                     </div>
                                     <div>
-                                        <p className="text-white/70 text-sm font-light mb-1">Teléfono</p>
+                                        <p className="text-white/70 text-sm font-light mb-1">
+                                            Teléfono
+                                        </p>
                                         <a
-                                            href={`tel:${locales[selectedLocal].phone.replace(/\s/g, '')}`}
+                                            href={`tel:${locales[selectedLocal].phone.replace(
+                                                /\s/g,
+                                                ""
+                                            )}`}
                                             className="text-white font-light hover:text-white/90 transition-colors duration-300 text-lg"
                                         >
                                             {locales[selectedLocal].phone}
@@ -204,7 +197,9 @@ const ContactSection = () => {
 
                         {/* Mapa del local seleccionado */}
                         <div className="bg-white/10 backdrop-blur-sm p-6 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500 mb-8">
-                            <h5 className="text-lg font-light text-white mb-4 text-center">Ubicación</h5>
+                            <h5 className="text-lg font-light text-white mb-4 text-center">
+                                Ubicación
+                            </h5>
                             <div className="relative rounded-2xl overflow-hidden">
                                 <iframe
                                     key={selectedLocal}
@@ -227,7 +222,9 @@ const ContactSection = () => {
                                 <Mail className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
                             </div>
                             <div>
-                                <p className="text-white/70 text-sm font-light">Email General</p>
+                                <p className="text-white/70 text-sm font-light">
+                                    Email General
+                                </p>
                                 <a
                                     href={`mailto:${generalContact.email}`}
                                     className="text-white font-light hover:text-white/90 transition-colors duration-300"
@@ -239,7 +236,7 @@ const ContactSection = () => {
                     </div>
 
                     {/* Right Column - Form */}
-                    <div
+                    {/* <div
                         className={`transition-all duration-700 transform ${isVisible
                             ? 'opacity-100 translate-x-0'
                             : 'opacity-0 translate-x-8'
@@ -248,7 +245,6 @@ const ContactSection = () => {
                     >
                         <div className="bg-white/10 backdrop-blur-sm p-8 lg:p-10 rounded-3xl border border-white/20 hover:bg-white/15 transition-all duration-500">
                             <div className="space-y-6">
-                                {/* Name Input */}
                                 <div>
                                     <label className="block text-sm font-light text-white/90 mb-3">
                                         Nombre Completo
@@ -263,7 +259,6 @@ const ContactSection = () => {
                                     />
                                 </div>
 
-                                {/* Email Input */}
                                 <div>
                                     <label className="block text-sm font-light text-white/90 mb-3">
                                         Email
@@ -278,7 +273,6 @@ const ContactSection = () => {
                                     />
                                 </div>
 
-                                {/* WhatsApp Input */}
                                 <div>
                                     <label className="block text-sm font-light text-white/90 mb-3">
                                         WhatsApp
@@ -293,7 +287,6 @@ const ContactSection = () => {
                                     />
                                 </div>
 
-                                {/* Local Preference */}
                                 <div>
                                     <label className="block text-sm font-light text-white/90 mb-3">
                                         Local de Preferencia
@@ -311,7 +304,6 @@ const ContactSection = () => {
                                     </select>
                                 </div>
 
-                                {/* Message Textarea */}
                                 <div>
                                     <label className="block text-sm font-light text-white/90 mb-3">
                                         Mensaje
@@ -326,7 +318,6 @@ const ContactSection = () => {
                                     />
                                 </div>
 
-                                {/* Submit Button */}
                                 <Button
                                     variant="white"
                                     size="lg"
@@ -343,21 +334,27 @@ const ContactSection = () => {
                                 {error && <p className="text-red-200 mt-2 text-center">{error}</p>}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Bottom decorative element */}
                 <div
                     className={`mt-20 sm:mt-24 flex justify-center transition-all duration-1000 transform ${isVisible
-                        ? 'opacity-100 translate-y-0'
-                        : 'opacity-0 translate-y-8'
+                            ? "opacity-100 translate-y-0"
+                            : "opacity-0 translate-y-8"
                         }`}
-                    style={{ transitionDelay: '1000ms' }}
+                    style={{ transitionDelay: "1000ms" }}
                 >
                     <div className="flex space-x-2">
                         <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                        <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+                        <div
+                            className="w-2 h-2 bg-white/60 rounded-full animate-pulse"
+                            style={{ animationDelay: "0.2s" }}
+                        ></div>
+                        <div
+                            className="w-2 h-2 bg-white/40 rounded-full animate-pulse"
+                            style={{ animationDelay: "0.4s" }}
+                        ></div>
                     </div>
                 </div>
             </div>
