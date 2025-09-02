@@ -62,30 +62,30 @@ const ProductsSection = () => {
         },
     ];
 
-    const accessories = [
-        // {
-        //     id: 'respaldos',
-        //     title: 'Respaldos',
-        //     subtitle: 'Diseño y Funcionalidad',
-        //     description: 'Respaldos ergonómicos que transforman tu cama en un espacio de lectura y relajación, combinando estilo y comodidad.',
-        //     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-        //     // buttonText: 'Ver Respaldos'
-        // },
-        {
-            id: 'bauleras',
-            title: 'Bauleras y Pies de Cama',
-            subtitle: 'Almacenamiento Elegante',
-            description: 'Soluciones de almacenamiento prácticas y elegantes que optimizan el espacio de tu dormitorio sin comprometer el estilo.',
-            image: '/imgs/pie.jpg',
-            // buttonText: 'Ver Accesorios'
-        }
-    ];
+    // const accessories = [
+    //     // {
+    //     //     id: 'respaldos',
+    //     //     title: 'Respaldos',
+    //     //     subtitle: 'Diseño y Funcionalidad',
+    //     //     description: 'Respaldos ergonómicos que transforman tu cama en un espacio de lectura y relajación, combinando estilo y comodidad.',
+    //     //     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    //     //     // buttonText: 'Ver Respaldos'
+    //     // },
+    //     {
+    //         id: 'bauleras',
+    //         title: 'Bauleras y Pies de Cama',
+    //         subtitle: 'Almacenamiento Elegante',
+    //         description: 'Soluciones de almacenamiento prácticas y elegantes que optimizan el espacio de tu dormitorio sin comprometer el estilo.',
+    //         image: '/imgs/pie.jpg',
+    //         // buttonText: 'Ver Accesorios'
+    //     }
+    // ];
 
     return (
         <section
             ref={sectionRef}
             id="productos"
-            className="w-full pb-16 sm:pb-20 lg:pb-24"
+            className="w-fulL"
         >
             {/* Header */}
             <div
@@ -104,7 +104,7 @@ const ProductsSection = () => {
             </div>
 
             {/* Main Categories Grid - 2x2 */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 mb-8 sm:mb-12 lg:mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
                 {categories.map((category, index) => (
                     <div
                         key={category.id}
@@ -167,7 +167,7 @@ const ProductsSection = () => {
             </div>
 
             {/* Accessories Section */}
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {/* <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div
                     className={`text-center mb-8 sm:mb-12 transition-all duration-700 transform ${isVisible
                         ? 'opacity-100 translate-y-0'
@@ -184,7 +184,6 @@ const ProductsSection = () => {
                     </p>
                 </div>
 
-                {/* Accessories Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8 max-w-5xl mx-auto">
                     {accessories.map((accessory, index) => (
                         <div
@@ -195,7 +194,7 @@ const ProductsSection = () => {
                                 }`}
                             style={{ transitionDelay: `${1000 + index * 200}ms` }}
                         >
-                            {/* Background Image */}
+
                             <div className="relative h-[350px] sm:h-[400px] lg:h-[450px]">
                                 <Image
                                     src={accessory.image}
@@ -205,51 +204,43 @@ const ProductsSection = () => {
                                     height={627}
                                 />
 
-                                {/* Overlay */}
+
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/70"></div>
 
-                                {/* Content Overlay */}
+
                                 <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
                                     <div className="transform transition-all duration-500 group-hover:translate-y-[-8px]">
-                                        {/* Subtitle */}
+
                                         <p className="text-white/80 text-xs sm:text-sm font-light mb-2 uppercase tracking-wider">
                                             {accessory.subtitle}
                                         </p>
 
-                                        {/* Title */}
+
                                         <h4 className="text-white text-xl sm:text-2xl lg:text-3xl font-light mb-3 sm:mb-4 leading-tight">
                                             {accessory.title}
                                         </h4>
 
-                                        {/* Description */}
+
                                         <p className="text-white/90 text-sm sm:text-base font-light mb-4 sm:mb-5 max-w-sm leading-relaxed">
                                             {accessory.description}
                                         </p>
 
-                                        {/* Button */}
+
                                         <div className="transform transition-all duration-300 group-hover:scale-105">
-                                            {/* <Button
-                                                variant="white"
-                                                outline
-                                                size="sm"
-                                                className="backdrop-blur-sm"
-                                            >
-                                                {accessory.buttonText}
-                                            </Button> */}
+
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Decorative Element */}
                                 <div className="absolute top-4 right-4 w-6 h-6 sm:w-8 sm:h-8 border border-white/30 rounded-full transform transition-all duration-500 group-hover:rotate-180 group-hover:scale-125"></div>
                             </div>
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
 
             {/* Bottom decorative element */}
-            <div
+            {/* <div
                 className={`mt-16 sm:mt-20 flex justify-center transition-all duration-1000 transform ${isVisible
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
@@ -257,7 +248,7 @@ const ProductsSection = () => {
                 style={{ transitionDelay: '1400ms' }}
             >
                 <div className="w-24 sm:w-32 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
-            </div>
+            </div> */}
         </section>
     );
 };
