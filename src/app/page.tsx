@@ -11,6 +11,7 @@ import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import MultimediaSection from './components/MultimediaSection';
 import WhatsAppButton from './components/WhatsAppButton';
+import BrandsSlider from './components/BrandsSlider';
 
 const LuxuryMattressLanding = () => {
   return (
@@ -18,7 +19,8 @@ const LuxuryMattressLanding = () => {
       <NavbarHeroSection/>
       <StatsSection/>
       <MultimediaSection/>
-      <BrandsSection/>
+      <BrandsSlider/>
+      {/* <BrandsSection/> */}
       <ProductsSection/>
       {/* <AboutSection/> */}
       <ServiceSection/>

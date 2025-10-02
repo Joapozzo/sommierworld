@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Phone, MessageCircle, MapPin, Mail } from 'lucide-react';
-import { locales as sucursales } from '../utils/data';
+import { brands, locales as sucursales } from '../utils/data';
 
 const Footer = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -22,13 +22,6 @@ const Footer = () => {
 
         return () => observer.disconnect();
     }, [isVisible]);
-
-    const partners = [
-        { name: 'Natural Soft', description: 'Lujo orgánico' },
-        { name: 'King Koil', description: 'Tradición premium' },
-        { name: 'Deseo', description: 'Innovación y diseño' },
-        { name: 'Inducol', description: 'Descanso de calidad' },
-    ];
 
     const generalContact = {
         email: 'info@sommierworld.com'
@@ -210,7 +203,7 @@ const Footer = () => {
                                 Nuestros Socios
                             </h4>
                             <div className="space-y-4">
-                                {partners.map((partner, index) => (
+                                {brands.map((partner, index) => (
                                     <div
                                         key={index}
                                         className={`group flex items-center space-x-3 transition-all duration-500 transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
@@ -222,9 +215,9 @@ const Footer = () => {
                                             <span className="text-white font-light block group-hover:text-blue-200 transition-colors duration-300">
                                                 {partner.name}
                                             </span>
-                                            <span className="text-white/60 text-sm font-light">
+                                            {/* <span className="text-white/60 text-sm font-light">
                                                 {partner.description}
-                                            </span>
+                                            </span> */}
                                         </div>
                                     </div>
                                 ))}

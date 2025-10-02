@@ -7,7 +7,7 @@ const WhatsAppButton = () => {
     const message = 'Hola Sommier World! Me gustaria contactarme con un asesor';
 
     const openWhatsApp = () => {
-        window.open(`https://wa.me/5493514237650?text=${message}`, "_blank");
+        window.open(`https://wa.me/5493513303661?text=${message}`, "_blank");
     };
 
     const handleClick = () => {

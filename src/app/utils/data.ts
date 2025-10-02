@@ -22,3 +22,15 @@ export const locales = [
             'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.7761860953415!2d-64.1470727!3d-31.4233675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432bd4ad09cbf31%3A0x11b28c5c4c863bf6!2sSOMMIER%20WORLD!5e0!3m2!1ses!2sar!4v1699024800001!5m2!1ses!2sar',
     },
 ];
+
+export const brands = [
+    { name: 'Namu', logo: '/logos/namu.svg' },
+    { name: 'King Koil', logo: '/logos/kingkoil.svg' },
+    { name: 'Inducol', logo: '/logos/inducol.svg' },
+    { name: 'Sprinwell', logo: '/logos/springwall.svg' },
+    { name: 'Natural Soft', logo: '/logos/naturalsoft.svg' },
+    { name: 'Deseo', logo: '/logos/deseo.svg' },
+    { name: 'Duvetex', logo: '/logos/duvetex.svg' },
+    { name: 'Maxiking', logo: '/logos/maxiking.svg' },
+    { name: 'Brescia', logo: '/logos/brescia.svg' }
+];

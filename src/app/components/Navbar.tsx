@@ -32,7 +32,7 @@ const EnhancedNavbar = () => {
     const menuItems = ['Inicio', 'Marcas', 'Productos', 'Sucursales'];
 
     const handleGoToWhp = () => {
-        window.open("https://wa.me/5493514237650?text=Hola Sommier World! Me gustaria contactarme con un asesor", "_blank");
+        window.open("https://wa.me/5493513303661?text=Hola Sommier World! Me gustaria contactarme con un asesor", "_blank");
     };
 
     return (
