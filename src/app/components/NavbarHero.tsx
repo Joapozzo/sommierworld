@@ -19,15 +19,25 @@ const NavbarHeroSection = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
+          {/* Desktop Image */}
           <Image
-            src="/imgs/hero-1.jpg"
+            src="/imgs/hero-desktop.webp"
             alt="Luxury bedroom"
-            className="w-full h-full object-cover"
+            className="hidden md:block w-full h-full object-cover"
             width={1920}
             height={1080}
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/50 via-blue-800/30 to-transparent md:bg-gradient-to-r md:from-blue-900/40 md:via-blue-800/30 md:to-transparent"></div>
+          {/* Mobile Image */}
+          <Image
+            src="/imgs/hero-mobile.webp"
+            alt="Luxury bedroom"
+            className="md:hidden w-full h-full object-cover"
+            width={768}
+            height={1024}
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 via-blue-800/30 to-transparent md:bg-gradient-to-r md:from-blue-900/40 md:via-blue-800/50 md:to-transparent"></div>
         </div>
 
         {/* Content */}

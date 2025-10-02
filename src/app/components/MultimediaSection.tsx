@@ -50,7 +50,7 @@ const MultimediaSection = () => {
             ([entry]) => {
                 if (entry.isIntersecting && !isVisible) {
                     setIsVisible(true);
-                    setTimeout(() => animateCount(0, 30, 2000, 'views'), 300);
+                    setTimeout(() => animateCount(0, 100, 2000, 'views'), 300);
                     // setTimeout(() => animateCount(0, 98, 2000, 'engagement'), 500);
                     // setTimeout(() => animateCount(0, 89, 2000, 'shares'), 700);
                 }
@@ -393,7 +393,7 @@ const MultimediaSection = () => {
                                         {/* Number */}
                                         <div>
                                             <span className="text-3xl sm:text-4xl font-light text-gray-800">
-                                                {stat.value}
+                                                +{stat.value}
                                             </span>
                                             <span className="text-2xl sm:text-3xl font-medium text-blue-600">
                                                 {stat.suffix}
